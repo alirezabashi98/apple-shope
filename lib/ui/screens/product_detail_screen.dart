@@ -32,7 +32,7 @@ class ProductDetailScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconAppleBlue),
+                          child: Image.asset(Assets.imagesIconAppleBlue),
                         ),
                         const Expanded(
                           child: Text(
@@ -48,7 +48,7 @@ class ProductDetailScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconBack),
+                          child: Image.asset(Assets.imagesIconBack),
                         ),
                       ],
                     ),
@@ -86,7 +86,7 @@ class ProductDetailScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset(Assets.iconStar),
+                            Image.asset(Assets.imagesIconStar),
                             const Text(
                               "4.6",
                               style: TextStyle(fontFamily: 'SM', fontSize: 12),
@@ -94,10 +94,10 @@ class ProductDetailScreen extends StatelessWidget {
                             const Spacer(),
                             SizedBox(
                               height: double.infinity,
-                              child: Image.asset(Assets.iphone),
+                              child: Image.asset(Assets.imagesIphone),
                             ),
                             const Spacer(),
-                            Image.asset(Assets.iconFavoriteDeactive),
+                            Image.asset(Assets.imagesIconFavoriteDeactive),
                           ],
                         ),
                       ),
@@ -121,7 +121,7 @@ class ProductDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Image.asset(Assets.iphone),
+                              child: Image.asset(Assets.imagesIphone),
                             ),
                           ),
                         ),
@@ -313,7 +313,7 @@ class ProductDetailScreen extends StatelessWidget {
                               color: ColorsApp.blueIndicator),
                         ),
                         const SizedBox(width: 10),
-                        Image.asset(Assets.iconLeftCategroy),
+                        Image.asset(Assets.imagesIconLeftCategroy),
                         const SizedBox(width: 10),
                       ],
                     ),
@@ -350,7 +350,7 @@ class ProductDetailScreen extends StatelessWidget {
                               color: ColorsApp.blueIndicator),
                         ),
                         const SizedBox(width: 10),
-                        Image.asset(Assets.iconLeftCategroy),
+                        Image.asset(Assets.imagesIconLeftCategroy),
                         const SizedBox(width: 10),
                       ],
                     ),
@@ -468,7 +468,7 @@ class ProductDetailScreen extends StatelessWidget {
                               color: ColorsApp.blueIndicator),
                         ),
                         const SizedBox(width: 10),
-                        Image.asset(Assets.iconLeftCategroy),
+                        Image.asset(Assets.imagesIconLeftCategroy),
                         const SizedBox(width: 10),
                       ],
                     ),

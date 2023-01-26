@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       SizedBox(
                         height: 20,
                         width: 20,
-                        child: Image.asset(Assets.iconAppleBlue),
+                        child: Image.asset(Assets.imagesIconAppleBlue),
                       ),
                       const Expanded(
                         child: Text(

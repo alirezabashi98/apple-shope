@@ -34,7 +34,7 @@ class CardScreen extends StatelessWidget {
                             SizedBox(
                               height: 20,
                               width: 20,
-                              child: Image.asset(Assets.iconAppleBlue),
+                              child: Image.asset(Assets.imagesIconAppleBlue),
                             ),
                             const Expanded(
                               child: Text(
@@ -168,7 +168,7 @@ class CardItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: Image.asset(Assets.iphone),
+                  child: Image.asset(Assets.imagesIphone),
                 ),
               ],
             ),
@@ -220,7 +220,7 @@ class OptionCheap extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(Assets.iconsOptions),
+            Image.asset(Assets.imagesIconOptions),
             const SizedBox(width: 10),
             const Text("data"),
           ],

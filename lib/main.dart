@@ -1,15 +1,44 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/bloc/category/category_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
+import 'package:flutter_apple_shop/data/repository/authentication_repository.dart';
+import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/screens/card_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/category_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/home_screen.dart';
+import 'package:flutter_apple_shop/ui/screens/login_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/profile_screen.dart';
+import 'package:flutter_apple_shop/util/auth_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+import 'bloc/authentication/auth_bloc.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await getItInit();
   runApp(const MyApp());
+}
+
+class Example extends StatelessWidget {
+  const Example({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          body: BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(),
+            child: const LoginScreen(),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
@@ -63,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                     fontFamily: 'SB', fontSize: 10, color: Colors.black),
                 items: [
                   BottomNavigationBarItem(
-                    icon: Image.asset(Assets.iconHome),
+                    icon: Image.asset(Assets.imagesIconHome),
                     activeIcon: Container(
                       margin: const EdgeInsets.only(bottom: 3),
                       decoration: const BoxDecoration(
@@ -76,12 +105,12 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      child: Image.asset(Assets.iconHomeActive),
+                      child: Image.asset(Assets.imagesIconHomeActive),
                     ),
                     label: 'خانه',
                   ),
                   BottomNavigationBarItem(
-                    icon: Image.asset(Assets.iconCategory),
+                    icon: Image.asset(Assets.imagesIconCategory),
                     activeIcon: Container(
                       margin: const EdgeInsets.only(bottom: 3),
                       decoration: const BoxDecoration(
@@ -94,12 +123,12 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      child: Image.asset(Assets.iconCategoryActive),
+                      child: Image.asset(Assets.imagesIconCategoryActive),
                     ),
                     label: 'دسته بندی',
                   ),
                   BottomNavigationBarItem(
-                    icon: Image.asset(Assets.iconBasket),
+                    icon: Image.asset(Assets.imagesIconBasket),
                     activeIcon: Container(
                       margin: const EdgeInsets.only(bottom: 3),
                       decoration: const BoxDecoration(
@@ -112,12 +141,12 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      child: Image.asset(Assets.iconBasketActive),
+                      child: Image.asset(Assets.imagesIconBasketActive),
                     ),
                     label: 'سبد خرید',
                   ),
                   BottomNavigationBarItem(
-                    icon: Image.asset(Assets.iconProfile),
+                    icon: Image.asset(Assets.imagesIconProfile),
                     activeIcon: Container(
                       margin: const EdgeInsets.only(bottom: 3),
                       decoration: const BoxDecoration(
@@ -130,7 +159,7 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                      child: Image.asset(Assets.iconProfileActive),
+                      child: Image.asset(Assets.imagesIconProfileActive),
                     ),
                     label: 'پروفایل',
                   ),
@@ -143,10 +172,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+
   List<Widget> getScreens() {
     return [
       const HomeScreen(),
-      const CategoryScreen(),
+      BlocProvider<CategoryBloc>(
+        create: (context) => CategoryBloc(),
+        child: const CategoryScreen(),
+      ),
       const CardScreen(),
       const ProfileScreen(),
     ];

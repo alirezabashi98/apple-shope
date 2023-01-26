@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconAppleBlue),
+                          child: Image.asset(Assets.imagesIconAppleBlue),
                         ),
                         const Expanded(
                           child: Text(
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconSearch),
+                          child: Image.asset(Assets.imagesIconSearch),
                         ),
                       ],
                     ),
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 20,
                       width: 20,
-                      child: Image.asset(Assets.iconLeftCategroy),
+                      child: Image.asset(Assets.imagesIconLeftCategroy),
                     ),
                     const SizedBox(width: 10),
                     const Text(
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 20,
                       width: 20,
-                      child: Image.asset(Assets.iconLeftCategroy),
+                      child: Image.asset(Assets.imagesIconLeftCategroy),
                     ),
                     const SizedBox(width: 10),
                     const Text(

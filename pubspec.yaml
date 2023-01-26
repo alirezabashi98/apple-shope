@@ -38,6 +38,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.0.0+2
   dotted_line: ^3.1.0
+  dartz: ^0.10.1
+  dio: ^4.0.6
+  get_it: ^7.2.0
+  shared_preferences: ^2.0.17
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  cached_network_image: 3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +71,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - lib/bloc/category/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

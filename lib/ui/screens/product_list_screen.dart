@@ -36,7 +36,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconAppleBlue),
+                          child: Image.asset(Assets.imagesIconAppleBlue),
                         ),
                         const Expanded(
                           child: Text(
@@ -52,7 +52,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                         SizedBox(
                           height: 20,
                           width: 20,
-                          child: Image.asset(Assets.iconBack),
+                          child: Image.asset(Assets.imagesIconBack),
                         )
                       ],
                     ),
