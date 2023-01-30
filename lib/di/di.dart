@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_apple_shop/data/datasource/authentication_datasource.dart';
+import 'package:flutter_apple_shop/data/datasource/banner_datasource.dart';
 import 'package:flutter_apple_shop/data/datasource/category_datasource.dart';
 import 'package:flutter_apple_shop/data/repository/authentication_repository.dart';
+import 'package:flutter_apple_shop/data/repository/banner_repository.dart';
 import 'package:flutter_apple_shop/data/repository/category_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,8 +29,10 @@ Future<void> getItInit() async {
       () => AuthenticationRemote());
   locator
       .registerFactory<ICategoryDataSource>(() => CategoryRemoteDataSource());
+  locator.registerFactory<IBannerDatasource>(() => BannerRemoteDatasource());
 
   // repositories
   locator.registerFactory<IAuthRipository>(() => AuthenticationRepository());
   locator.registerFactory<ICategoryRepository>(() => CategoryRepository());
+  locator.registerFactory<IBannerRepository>(() => BannerRepository());
 }

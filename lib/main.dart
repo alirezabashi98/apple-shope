@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/category/category_bloc.dart';
+import 'package:flutter_apple_shop/bloc/home/home_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:flutter_apple_shop/data/repository/authentication_repository.dart';
+import 'package:flutter_apple_shop/data/repository/banner_repository.dart';
 import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/screens/card_screen.dart';
@@ -28,12 +30,16 @@ class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          body: BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(),
-            child: const LoginScreen(),
+      home: Scaffold(
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async{
+
+              var response = await BannerRepository().getBanners();
+              response.fold((l) => print(l), (r) => print(r[0].thumbnail));
+
+            },
+            child: const Text("on click"),
           ),
         ),
       ),
@@ -172,10 +178,12 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
   List<Widget> getScreens() {
     return [
-      const HomeScreen(),
+      BlocProvider<HomeBloc>(
+        create: (context) => HomeBloc(),
+        child: const HomeScreen(),
+      ),
       BlocProvider<CategoryBloc>(
         create: (context) => CategoryBloc(),
         child: const CategoryScreen(),

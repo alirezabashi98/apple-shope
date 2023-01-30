@@ -10,6 +10,7 @@ class Assets {
   static const String categoryCategoryState = 'lib/bloc/category/category_state.dart';
   static const String constantsConstants = 'lib/constants/constants.dart';
   static const String datasourceAuthenticationDatasource = 'lib/data/datasource/authentication_datasource.dart';
+  static const String datasourceBannerDatasource = 'lib/data/datasource/banner_datasource.dart';
   static const String datasourceCategoryDatasource = 'lib/data/datasource/category_datasource.dart';
   static const String diDi = 'lib/di/di.dart';
   static const String fontsGilroyBold = 'assets/fonts/GilroyBold.ttf';
@@ -22,6 +23,9 @@ class Assets {
   static const String fontsShabnamBold = 'assets/fonts/ShabnamBold.ttf';
   static const String fontsShabnamMedium = 'assets/fonts/ShabnamMedium.ttf';
   static const String generatedAssets = 'lib/generated/assets.dart';
+  static const String homeHomeBloc = 'lib/bloc/home/home_bloc.dart';
+  static const String homeHomeEvent = 'lib/bloc/home/home_event.dart';
+  static const String homeHomeState = 'lib/bloc/home/home_state.dart';
   static const String imagesActiveFavProduct = 'assets/images/active_fav_product.png';
   static const String imagesIconAppleBlue = 'assets/images/icon_apple_blue.png';
   static const String imagesIconApplication = 'assets/images/icon_application.png';
@@ -42,8 +46,10 @@ class Assets {
   static const String imagesIconStar = 'assets/images/icon_star.png';
   static const String imagesIphone = 'assets/images/iphone.png';
   static const String libMain = 'lib/main.dart';
+  static const String modelBannerModel = 'lib/data/model/banner_model.dart';
   static const String modelCategoryModel = 'lib/data/model/category_model.dart';
   static const String repositoryAuthenticationRepository = 'lib/data/repository/authentication_repository.dart';
+  static const String repositoryBannerRepository = 'lib/data/repository/banner_repository.dart';
   static const String repositoryCategoryRepository = 'lib/data/repository/category_repository.dart';
   static const String screensCardScreen = 'lib/ui/screens/card_screen.dart';
   static const String screensCategoryScreen = 'lib/ui/screens/category_screen.dart';

@@ -2,27 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../data/model/banner_model.dart';
+import 'cached_image.dart';
+
 class BannerSlider extends StatelessWidget {
-  const BannerSlider({super.key});
+  final List<BannerModel> bannerList;
+
+  const BannerSlider({super.key, required this.bannerList});
 
   @override
   Widget build(BuildContext context) {
-    var controller = PageController(viewportFraction: 0.8);
+    var controller = PageController(viewportFraction: 0.9);
 
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
         SizedBox(
-          height: 200,
+          height: 177,
           child: PageView.builder(
             controller: controller,
-            itemCount: 3,
+            itemCount: bannerList.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 12, right: 12),
-                child: Container(
-                  color: Colors.amber,
-                  height: 200,
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 6),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                child: CachedImage(
+                  imageUrl: bannerList[index].thumbnail!,
+                  radius: 15,
                 ),
               );
             },
@@ -33,8 +40,8 @@ class BannerSlider extends StatelessWidget {
           child: SmoothPageIndicator(
             effect: const ExpandingDotsEffect(
               expansionFactor: 4,
-              dotHeight: 10,
-              dotWidth: 10,
+              dotHeight: 6,
+              dotWidth: 5,
               dotColor: Colors.white,
               activeDotColor: ColorsApp.blueIndicator,
             ),
