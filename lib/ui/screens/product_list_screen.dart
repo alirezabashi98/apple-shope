@@ -3,6 +3,8 @@ import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/widgets/product_item.dart';
 
+import '../../data/model/product_model.dart';
+
 class ProductListScreen extends StatefulWidget {
   const ProductListScreen({Key? key}) : super(key: key);
 
@@ -64,7 +66,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => const ProductItem(),
+                  (context, index) => ProductItem(product: ProductModel("","","","",22,22,"","",2,""),),
                 ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
+
+import '../../data/model/category_model.dart';
+import '../../util/hex_color.dart';
 
 class CategoryHorizontalItemChip extends StatelessWidget {
-  const CategoryHorizontalItemChip({
-    Key? key,
-  }) : super(key: key);
+  final CategoryModel category;
 
-// SizedBox(
-//             height: 100,
-//             child: ListView.builder(
-//               scrollDirection: Axis.horizontal,
-//               itemCount: 10,
-//               itemBuilder: (context, index) {
-//                 return Container(
-//                   margin: EdgeInsets.only(
-//                     left: (index == 0) ? 44 : 10,
-//                     right: (index == 9) ? 44 : 10,
-//                   ),
-//                   child: const CategoryHorizontalItemList(),
-//                 );
-//               },
-//             ),
-//           ),
+  const CategoryHorizontalItemChip({Key? key, required this.category})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +21,30 @@ class CategoryHorizontalItemChip extends StatelessWidget {
             shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(40),
             ),
-            color: Colors.amber,
-            shadows: const [
+            color: hexColor(category.color!),
+            shadows: [
               BoxShadow(
-                color: Colors.amber,
+                color: hexColor(category.color!),
                 blurRadius: 21,
                 spreadRadius: -9,
-                offset: Offset(0.0, 10),
+                offset: const Offset(0.0, 10),
               ),
             ],
           ),
-          child: const Icon(
-            Icons.mouse,
-            color: Colors.white,
+          child: Center(
+            child: SizedBox(
+              width: 25,
+              height: 25,
+              child: Center(
+                child: CachedImage(imageUrl: category.icon!),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          "همه",
-          style: TextStyle(
+        Text(
+          category.title ?? "ok",
+          style: const TextStyle(
             fontFamily: 'SB',
             fontSize: 12,
           ),

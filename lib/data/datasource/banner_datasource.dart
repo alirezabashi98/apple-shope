@@ -14,14 +14,18 @@ class BannerRemoteDatasource extends IBannerDatasource {
   @override
   Future<List<BannerModel>> getBanners() async {
     try {
+      print('request alfa');
       var respones = await _dio.get('collections/banner/records');
+      print('success alfa');
       return respones.data['items']
           .map<BannerModel>(
               (jsonMapObject) => BannerModel.fromMapJson(jsonMapObject))
           .toList();
     } on DioError catch (ex) {
+      print('error alfa');
       throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
     } catch (ex) {
+      print('error alfa');
       throw ApiException(0, 'unknown error');
     }
   }

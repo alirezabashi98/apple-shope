@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
+import 'package:flutter_apple_shop/data/model/category_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/widgets/category_horizontal_item_chip.dart';
 
@@ -13,6 +14,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  var exampleCategory = CategoryModel("1", "1.0", "thumbnail", "title", "ffffff", "icon");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,23 +72,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Wrap(
                 runSpacing: 20,
                 spacing: 20,
-                children: const [
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
-                  CategoryHorizontalItemChip(),
+                children: [
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
+                  CategoryHorizontalItemChip(category: exampleCategory),
                 ],
               ),
             ),

@@ -18,7 +18,7 @@ class BannerSlider extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       children: [
         SizedBox(
-          height: 177,
+          height: 150,
           child: PageView.builder(
             controller: controller,
             itemCount: bannerList.length,

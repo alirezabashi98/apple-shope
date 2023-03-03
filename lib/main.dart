@@ -4,19 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/category/category_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
-import 'package:flutter_apple_shop/data/repository/authentication_repository.dart';
 import 'package:flutter_apple_shop/data/repository/banner_repository.dart';
 import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/screens/card_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/category_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/home_screen.dart';
-import 'package:flutter_apple_shop/ui/screens/login_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/profile_screen.dart';
-import 'package:flutter_apple_shop/util/auth_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/authentication/auth_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -180,9 +176,12 @@ class _MyAppState extends State<MyApp> {
 
   List<Widget> getScreens() {
     return [
-      BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(),
-        child: const HomeScreen(),
+      Directionality(
+        textDirection: TextDirection.rtl,
+        child: BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc(),
+          child: const HomeScreen(),
+        ),
       ),
       BlocProvider<CategoryBloc>(
         create: (context) => CategoryBloc(),

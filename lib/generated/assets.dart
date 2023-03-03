@@ -12,6 +12,8 @@ class Assets {
   static const String datasourceAuthenticationDatasource = 'lib/data/datasource/authentication_datasource.dart';
   static const String datasourceBannerDatasource = 'lib/data/datasource/banner_datasource.dart';
   static const String datasourceCategoryDatasource = 'lib/data/datasource/category_datasource.dart';
+  static const String datasourceProductDatasource = 'lib/data/datasource/product_datasource.dart';
+  static const String datasourceProductDetailDatasource = 'lib/data/datasource/product_detail_datasource.dart';
   static const String diDi = 'lib/di/di.dart';
   static const String fontsGilroyBold = 'assets/fonts/GilroyBold.ttf';
   static const String fontsGilroyExtraBold = 'assets/fonts/GilroyExtraBold.ttf';
@@ -48,9 +50,19 @@ class Assets {
   static const String libMain = 'lib/main.dart';
   static const String modelBannerModel = 'lib/data/model/banner_model.dart';
   static const String modelCategoryModel = 'lib/data/model/category_model.dart';
+  static const String modelProductImageModel = 'lib/data/model/product_image_model.dart';
+  static const String modelProductModel = 'lib/data/model/product_model.dart';
+  static const String modelProductVarintModel = 'lib/data/model/product_varint_model.dart';
+  static const String modelVariantModel = 'lib/data/model/variant_model.dart';
+  static const String modelVariantTypeModel = 'lib/data/model/variant_type_model.dart';
+  static const String productProductBloc = 'lib/bloc/product/product_bloc.dart';
+  static const String productProductEvent = 'lib/bloc/product/product_event.dart';
+  static const String productProductState = 'lib/bloc/product/product_state.dart';
   static const String repositoryAuthenticationRepository = 'lib/data/repository/authentication_repository.dart';
   static const String repositoryBannerRepository = 'lib/data/repository/banner_repository.dart';
   static const String repositoryCategoryRepository = 'lib/data/repository/category_repository.dart';
+  static const String repositoryProductDetailRepository = 'lib/data/repository/product_detail_repository.dart';
+  static const String repositoryProductRepository = 'lib/data/repository/product_repository.dart';
   static const String screensCardScreen = 'lib/ui/screens/card_screen.dart';
   static const String screensCategoryScreen = 'lib/ui/screens/category_screen.dart';
   static const String screensHomeScreen = 'lib/ui/screens/home_screen.dart';
@@ -60,6 +72,8 @@ class Assets {
   static const String screensProfileScreen = 'lib/ui/screens/profile_screen.dart';
   static const String utilApiException = 'lib/util/api_exception.dart';
   static const String utilAuthManager = 'lib/util/auth_manager.dart';
+  static const String utilHexColor = 'lib/util/hex_color.dart';
+  static const String utilOpenPage = 'lib/util/open_page.dart';
   static const String widgetsBannerSlider = 'lib/ui/widgets/banner_slider.dart';
   static const String widgetsCachedImage = 'lib/ui/widgets/cached_image.dart';
   static const String widgetsCategoryHorizontalItemChip = 'lib/ui/widgets/category_horizontal_item_chip.dart';
