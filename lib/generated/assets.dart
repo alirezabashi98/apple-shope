@@ -8,10 +8,14 @@ class Assets {
   static const String categoryCategoryBloc = 'lib/bloc/category/category_bloc.dart';
   static const String categoryCategoryEvent = 'lib/bloc/category/category_event.dart';
   static const String categoryCategoryState = 'lib/bloc/category/category_state.dart';
+  static const String categoryProductCategoryProductBloc = 'lib/bloc/categoryProduct/category_product_bloc.dart';
+  static const String categoryProductCategoryProductEvent = 'lib/bloc/categoryProduct/category_product_event.dart';
+  static const String categoryProductCategoryProductState = 'lib/bloc/categoryProduct/category_product_state.dart';
   static const String constantsConstants = 'lib/constants/constants.dart';
   static const String datasourceAuthenticationDatasource = 'lib/data/datasource/authentication_datasource.dart';
   static const String datasourceBannerDatasource = 'lib/data/datasource/banner_datasource.dart';
   static const String datasourceCategoryDatasource = 'lib/data/datasource/category_datasource.dart';
+  static const String datasourceCategoryProductDatasource = 'lib/data/datasource/category_product_datasource.dart';
   static const String datasourceProductDatasource = 'lib/data/datasource/product_datasource.dart';
   static const String datasourceProductDetailDatasource = 'lib/data/datasource/product_detail_datasource.dart';
   static const String diDi = 'lib/di/di.dart';
@@ -52,6 +56,7 @@ class Assets {
   static const String modelCategoryModel = 'lib/data/model/category_model.dart';
   static const String modelProductImageModel = 'lib/data/model/product_image_model.dart';
   static const String modelProductModel = 'lib/data/model/product_model.dart';
+  static const String modelProductPropertyModel = 'lib/data/model/product_property_model.dart';
   static const String modelProductVarintModel = 'lib/data/model/product_varint_model.dart';
   static const String modelVariantModel = 'lib/data/model/variant_model.dart';
   static const String modelVariantTypeModel = 'lib/data/model/variant_type_model.dart';
@@ -60,6 +65,7 @@ class Assets {
   static const String productProductState = 'lib/bloc/product/product_state.dart';
   static const String repositoryAuthenticationRepository = 'lib/data/repository/authentication_repository.dart';
   static const String repositoryBannerRepository = 'lib/data/repository/banner_repository.dart';
+  static const String repositoryCategoryProductRepository = 'lib/data/repository/category_product_repository.dart';
   static const String repositoryCategoryRepository = 'lib/data/repository/category_repository.dart';
   static const String repositoryProductDetailRepository = 'lib/data/repository/product_detail_repository.dart';
   static const String repositoryProductRepository = 'lib/data/repository/product_repository.dart';

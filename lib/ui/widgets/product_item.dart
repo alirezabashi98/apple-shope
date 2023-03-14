@@ -21,7 +21,7 @@ class ProductItem extends StatelessWidget {
           context,
           BlocProvider(
             create: (context) => ProductBloc(),
-            child: const ProductDetailScreen(),
+            child: ProductDetailScreen(product: product),
           ),
         );
       },

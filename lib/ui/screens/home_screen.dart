@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/bloc/categoryProduct/category_product_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_event.dart';
 import 'package:flutter_apple_shop/bloc/home/home_state.dart';
@@ -7,9 +8,10 @@ import 'package:flutter_apple_shop/data/model/banner_model.dart';
 import 'package:flutter_apple_shop/data/model/category_model.dart';
 import 'package:flutter_apple_shop/data/model/product_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
+import 'package:flutter_apple_shop/ui/screens/product_list_screen.dart';
 import 'package:flutter_apple_shop/ui/widgets/banner_slider.dart';
-import 'package:flutter_apple_shop/ui/widgets/product_item.dart';
 import 'package:flutter_apple_shop/ui/widgets/category_horizontal_item_chip.dart';
+import 'package:flutter_apple_shop/ui/widgets/product_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -281,8 +283,7 @@ class _getCategoryList extends StatelessWidget {
                   left: (index == 0) ? 20 : 10,
                   right: (index == 9) ? 20 : 10,
                 ),
-                child:
-                    CategoryHorizontalItemChip(category: categoryList[index]),
+                child: CategoryHorizontalItemChip(category: categoryList[index]),
               );
             },
           ),
