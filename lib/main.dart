@@ -4,19 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/category/category_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
+import 'package:flutter_apple_shop/data/model/basket_model.dart';
 import 'package:flutter_apple_shop/data/repository/banner_repository.dart';
 import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
-import 'package:flutter_apple_shop/ui/screens/card_screen.dart';
+import 'package:flutter_apple_shop/ui/page/card_page.dart';
 import 'package:flutter_apple_shop/ui/screens/category_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/home_screen.dart';
 import 'package:flutter_apple_shop/ui/screens/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // di
   await getItInit();
+  // database hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(BasketModelAdapter());
+  await Hive.openBox<BasketModel>('BasketBox');
+  // run ui
   runApp(const MyApp());
 }
 
@@ -32,6 +40,7 @@ class Example extends StatelessWidget {
             onPressed: () async{
 
               var response = await BannerRepository().getBanners();
+              // ignore: avoid_print
               response.fold((l) => print(l), (r) => print(r[0].thumbnail));
 
             },
@@ -187,7 +196,7 @@ class _MyAppState extends State<MyApp> {
         create: (context) => CategoryBloc(),
         child: const CategoryScreen(),
       ),
-      const CardScreen(),
+      const CardPage(),
       const ProfileScreen(),
     ];
   }

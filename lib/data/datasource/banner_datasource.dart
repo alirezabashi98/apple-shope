@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:flutter_apple_shop/data/model/banner_model.dart';
 import 'package:flutter_apple_shop/di/di.dart';

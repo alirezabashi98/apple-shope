@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:flutter_apple_shop/bloc/product/product_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:flutter_apple_shop/ui/screens/product_detail_screen.dart';

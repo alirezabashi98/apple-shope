@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_apple_shop/bloc/categoryProduct/category_product_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_bloc.dart';
 import 'package:flutter_apple_shop/bloc/home/home_event.dart';
 import 'package:flutter_apple_shop/bloc/home/home_state.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_apple_shop/data/model/banner_model.dart';
 import 'package:flutter_apple_shop/data/model/category_model.dart';
 import 'package:flutter_apple_shop/data/model/product_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
-import 'package:flutter_apple_shop/ui/screens/product_list_screen.dart';
 import 'package:flutter_apple_shop/ui/widgets/banner_slider.dart';
 import 'package:flutter_apple_shop/ui/widgets/category_horizontal_item_chip.dart';
 import 'package:flutter_apple_shop/ui/widgets/product_item.dart';
@@ -221,6 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+// ignore: camel_case_types
 class _getMostViewedProducts extends StatelessWidget {
   final List<ProductModel> product;
   const _getMostViewedProducts({Key? key,required this.product}) : super(key: key);
@@ -246,6 +245,7 @@ class _getMostViewedProducts extends StatelessWidget {
 }
 
 
+// ignore: camel_case_types
 class _getBanners extends StatelessWidget {
   final List<BannerModel> bannerList;
 
@@ -261,6 +261,7 @@ class _getBanners extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _getCategoryList extends StatelessWidget {
   final List<CategoryModel> categoryList;
 
@@ -293,6 +294,7 @@ class _getCategoryList extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _getBastSellerProducts extends StatelessWidget {
   final List<ProductModel> listProduct;
   const _getBastSellerProducts({Key? key,required this.listProduct}) : super(key: key);

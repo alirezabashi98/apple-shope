@@ -8,7 +8,6 @@ import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/widgets/product_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/model/product_model.dart';
 
 class ProductListScreen extends StatefulWidget {
   final CategoryModel category;

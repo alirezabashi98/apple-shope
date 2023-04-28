@@ -90,6 +90,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 }
 
+// ignore: camel_case_types
 class _listCategory extends StatelessWidget {
   final List<CategoryModel>? list;
 

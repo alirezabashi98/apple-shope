@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:flutter_apple_shop/data/model/category_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';

@@ -11,7 +11,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _usernameTextController = TextEditingController(text: 'amirahmad');
+    // ignore: no_leading_underscores_for_local_identifiers
     final _passwordTextController = TextEditingController(text: '12345678');
 
     return Scaffold(

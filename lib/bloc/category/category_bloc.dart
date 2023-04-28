@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_apple_shop/bloc/category/category_event.dart';
 import 'package:flutter_apple_shop/bloc/category/category_state.dart';

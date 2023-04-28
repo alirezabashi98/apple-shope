@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_event.dart';
 import 'package:flutter_apple_shop/bloc/product/product_bloc.dart';
 import 'package:flutter_apple_shop/bloc/product/product_event.dart';
 import 'package:flutter_apple_shop/bloc/product/product_state.dart';
@@ -100,7 +102,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       VariantContainer(productVariantList: productVariant),
                 ),
                 state.productProperties.fold(
-                  (errorMessage) => SliverToBoxAdapter(),
+                  (errorMessage) => const SliverToBoxAdapter(),
                   (productProperties) =>
                       ProductProperties(propertiesList: productProperties),
                 ),
@@ -233,9 +235,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        PriceTagButton(),
-                        AddToBasketButton(),
+                      children: [
+                        const PriceTagButton(),
+                        AddToBasketButton(product: widget.product),
                       ],
                     ),
                   ),
@@ -362,7 +364,7 @@ class _ProductPropertiesState extends State<ProductProperties> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.propertiesList.isEmpty) {
+    if (widget.propertiesList.isEmpty) {
       return const SliverToBoxAdapter();
     }
     return SliverToBoxAdapter(
@@ -751,7 +753,8 @@ class _GalleryWidgetState extends State<GalleryWidget> {
 }
 
 class AddToBasketButton extends StatelessWidget {
-  const AddToBasketButton({Key? key}) : super(key: key);
+  final ProductModel product;
+  const AddToBasketButton({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -770,18 +773,23 @@ class AddToBasketButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: const SizedBox(
-              width: 160,
-              height: 53,
-              child: Center(
-                  child: Text(
-                "افزود به سبد خرید",
-                style: TextStyle(
-                  fontFamily: 'SB',
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              )),
+            child: GestureDetector(
+              onTap: () async{
+                context.read<ProductBloc>().add(ProductAddToBasket(product));
+              },
+              child: const SizedBox(
+                width: 160,
+                height: 53,
+                child: Center(
+                    child: Text(
+                  "افزود به سبد خرید",
+                  style: TextStyle(
+                    fontFamily: 'SB',
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                )),
+              ),
             ),
           ),
         ),

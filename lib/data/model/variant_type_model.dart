@@ -30,4 +30,5 @@ VariantTypeEnum _getTypeEnum(String type) {
   }
 }
 
+// ignore: constant_identifier_names
 enum VariantTypeEnum { Color, Storage, Voltage }

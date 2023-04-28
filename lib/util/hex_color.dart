@@ -8,3 +8,9 @@ Color hexColor(String color) {
 
   return Color(hexColorInt);
 }
+
+extension HexColor on String{
+  Color parseToColor(){
+    return hexColor(this);
+  }
+}

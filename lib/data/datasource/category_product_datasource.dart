@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_apple_shop/data/model/product_model.dart';
-import 'package:flutter_apple_shop/data/model/variant_model.dart';
 import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/util/api_exception.dart';
 

@@ -1,90 +1,147 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_state.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
+import 'package:flutter_apple_shop/data/model/basket_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
+import 'package:flutter_apple_shop/r.dart';
+import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
+import 'package:flutter_apple_shop/util/hex_color.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardScreen extends StatelessWidget {
+class CardScreen extends StatefulWidget {
   const CardScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CardScreen> createState() => _CardScreenState();
+}
+
+class _CardScreenState extends State<CardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.backgroundScreenColor,
       body: SafeArea(
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20, left: 20, top: 20, bottom: 32),
-                    child: Container(
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+        child: BlocBuilder<BasketBloc, BasketState>(
+          builder: (context, state) {
+            return Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Image.asset(Assets.imagesIconAppleBlue),
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "سبد خرید",
-                                style: TextStyle(
-                                  fontFamily: 'SM',
-                                  fontSize: 16,
-                                  color: ColorsApp.mainBlue,
+                        padding: const EdgeInsets.only(
+                            right: 20, left: 20, top: 20, bottom: 32),
+                        child: Container(
+                          height: 46,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child:
+                                      Image.asset(Assets.imagesIconAppleBlue),
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
+                                const Expanded(
+                                  child: Text(
+                                    "سبد خرید",
+                                    style: TextStyle(
+                                      fontFamily: 'SM',
+                                      fontSize: 16,
+                                      color: ColorsApp.mainBlue,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // todo
+                    if (state is BasketDataFetchedState) ...[
+                      state.basket.fold((errorMessage) {
+                        print('error');
+                        return SliverToBoxAdapter(
+                          child: Center(
+                            child: Text(errorMessage),
+                          ),
+                        );
+                      }, (basketList) {
+                        print('add ${basketList.length}');
+                        return SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            childCount: basketList.length,
+                            (context, index) => CardItem(basketList[index]),
+                          ),
+                        );
+                      }
+                          // SliverList(
+                          //   delegate: SliverChildBuilderDelegate(
+                          //     childCount: basketList.length,
+                          //     (context, index) => Text(basketList[index].name),
+                          //   ),
+                          // ),
+                          ),
+                    ],
+                    // SliverToBoxAdapter(
+                    //   child: ValueListenableBuilder(
+                    //     valueListenable: box.listenable(),
+                    //     builder: (context, value, child) {
+                    //       return SizedBox(
+                    //         height: 600,
+                    //         child: ListView.builder(
+                    //           itemCount: box.length,
+                    //           itemBuilder: (context, index) {
+                    //             BasketModel item =
+                    //                 box.getAt(index) as BasketModel;
+                    //             return Text(item.name);
+                    //           },
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                    const SliverPadding(padding: EdgeInsets.only(bottom: 100))
+                  ],
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(right: 20, left: 20, bottom: 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 53,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorsApp.mainGreen,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "ادامه فرایند خرید",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'SM',
                         ),
                       ),
                     ),
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => const CardItem(),
-                  ),
-                ),
-                const SliverPadding(padding: EdgeInsets.only(bottom: 100))
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 53,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorsApp.mainGreen,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    "ادامه فرایند خرید",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'SM',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
@@ -92,7 +149,9 @@ class CardScreen extends StatelessWidget {
 }
 
 class CardItem extends StatelessWidget {
-  const CardItem({
+  final BasketModel basket;
+  const CardItem(
+    this.basket, {
     Key? key,
   }) : super(key: key);
 
@@ -120,11 +179,26 @@ class CardItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        Text(
+                          basket.name,
+                          style:
+                              const TextStyle(fontFamily: 'SB', fontSize: 16),
+                          textDirection: TextDirection.rtl,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 6),
+                        //  Text(
+                        //   basket.,
+                        //   style: TextStyle(fontFamily: 'SM', fontSize: 12),
+                        //   overflow: TextOverflow.ellipsis,
+                        //   maxLines: 1,
+                        // ),
+                        const SizedBox(height: 6),
                         Directionality(
                           textDirection: TextDirection.rtl,
                           child: Row(
                             children: [
-                              const Text("39.000.000"),
+                              Text(basket.price.toString()),
                               const SizedBox(width: 3),
                               const Text("تومان"),
                               Container(
@@ -150,16 +224,22 @@ class CardItem extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 6),
                         Wrap(
                           spacing: 5,
                           runSpacing: 5,
                           children: const [
-                            OptionCheap(),
-                            OptionCheap(),
-                            OptionCheap(),
-                            OptionCheap(),
-                            OptionCheap(),
+                            OptionCheap(
+                              '۲۵۶ گیگابیت',
+                            ),
+                            OptionCheap(
+                              'رنگ ابی',
+                              color: '456798',
+                            ),
+                            OptionCheap(
+                              'حذف',
+                              icon: AssetImages.iconTrash,
+                            ),
                           ],
                         ),
                       ],
@@ -168,7 +248,12 @@ class CardItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: Image.asset(Assets.imagesIphone),
+                  child: SizedBox(
+                    width: 100, 
+                    child:CachedImage(
+                        imageUrl: basket.thumbnail.toString()    
+                      ),
+                  ),
                 ),
               ],
             ),
@@ -187,10 +272,10 @@ class CardItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text("تومان"),
-                SizedBox(width: 5),
-                Text("59.000.000"),
+              children: [
+                const Text("تومان"),
+                const SizedBox(width: 5),
+                Text(basket.realPrice.toString()),
               ],
             ),
           ),
@@ -201,9 +286,11 @@ class CardItem extends StatelessWidget {
 }
 
 class OptionCheap extends StatelessWidget {
-  const OptionCheap({
-    Key? key,
-  }) : super(key: key);
+  final String? color;
+  final String? icon;
+  final String title;
+  const OptionCheap(this.title, {Key? key, this.color, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -220,9 +307,26 @@ class OptionCheap extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(Assets.imagesIconOptions),
-            const SizedBox(width: 10),
-            const Text("data"),
+            if (color != null) ...{
+              Container(
+                width: 6,
+                height: 6,
+                margin: const EdgeInsets.only(right: 4),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: hexColor(color!),
+                ),
+              ),
+            },
+            Text(
+              title,
+              textDirection: TextDirection.rtl,
+              style: const TextStyle(fontFamily: 'SM', fontSize: 12),
+            ),
+            if (icon != null) ...{
+              const SizedBox(width: 4),
+              Image.asset(AssetImages.iconTrash),
+            },
           ],
         ),
       ),
