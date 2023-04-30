@@ -1,10 +1,10 @@
 # flutter_apple_shop
 
-A store written with Flutter
-Bloc architecture
-Dependency injection
-Hive database
-Rest api
+A store written with Flutter <br>
+* Bloc architecture 
+* Dependency injection
+* Hive database
+* Rest api <br><br>
 And ...
 
 ## screenshots
