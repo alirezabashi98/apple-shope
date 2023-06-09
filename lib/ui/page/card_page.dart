@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:flutter_apple_shop/bloc/basket/basket_event.dart';
+import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/ui/screens/card_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +13,7 @@ class CardPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) {
-          var bloc = BasketBloc();
+          var bloc = locator.get<BasketBloc>();
           bloc.add(BasketFetchFromHiveEvent());
           return bloc;
         },

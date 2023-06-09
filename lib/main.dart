@@ -18,12 +18,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // di
-  await getItInit();
   // database hive
   await Hive.initFlutter();
   Hive.registerAdapter(BasketModelAdapter());
   await Hive.openBox<BasketModel>('BasketBox');
+  // di : get it
+  await getItInit();
   // run ui
   runApp(const MyApp());
 }

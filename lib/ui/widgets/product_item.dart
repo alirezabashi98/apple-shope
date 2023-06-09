@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:flutter_apple_shop/bloc/product/product_bloc.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
+import 'package:flutter_apple_shop/di/di.dart';
 import 'package:flutter_apple_shop/ui/screens/product_detail_screen.dart';
 import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
 import 'package:flutter_apple_shop/util/open_page.dart';
@@ -20,8 +21,8 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         openPage(
           context,
-          BlocProvider(
-            create: (context) => ProductBloc(),
+          BlocProvider<BasketBloc>.value(
+            value: locator.get<BasketBloc>(),
             child: ProductDetailScreen(product: product),
           ),
         );

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:flutter_apple_shop/data/datasource/authentication_datasource.dart';
 import 'package:flutter_apple_shop/data/datasource/banner_datasource.dart';
 import 'package:flutter_apple_shop/data/datasource/basket_datasource.dart';
@@ -44,8 +45,7 @@ Future<void> getItInit() async {
       () => DetailProductRemoteDatasource());
   locator.registerFactory<ICategoryProductDatasource>(
       () => CategoryProductRemoteDatasource());
-  locator.registerFactory<IBasketDatasource>(
-      () => BasketLocalDatasource());
+  locator.registerFactory<IBasketDatasource>(() => BasketLocalDatasource());
 
   // repositories
   locator.registerFactory<IAuthRipository>(() => AuthenticationRepository());
@@ -56,6 +56,8 @@ Future<void> getItInit() async {
       () => DetaileProductRepository());
   locator.registerFactory<ICategoryProductRepository>(
       () => CategoryProductRepository());
-  locator.registerFactory<IBasketRepository>(
-      () => BasketRepository());
+  locator.registerFactory<IBasketRepository>(() => BasketRepository());
+
+  // bloc
+  locator.registerSingleton<BasketBloc>(BasketBloc());
 }

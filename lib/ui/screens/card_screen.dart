@@ -9,6 +9,9 @@ import 'package:flutter_apple_shop/r.dart';
 import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
 import 'package:flutter_apple_shop/util/hex_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:zarinpal/zarinpal.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({Key? key}) : super(key: key);
@@ -18,6 +21,39 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
+  PaymentRequest _paymentRequest = PaymentRequest();
+  @override
+  void initState() {
+    super.initState();
+    _paymentRequest.setIsSandBox(true);
+    _paymentRequest.setAmount(1000);
+    _paymentRequest.setDescription('this is for test');
+    // todo
+    _paymentRequest.setMerchantID('merchantID');
+    _paymentRequest.setCallbackURL('alirezabashi98://shop');
+
+    linkStream.listen(
+      (deepLink) {
+        if (deepLink!.toLowerCase().contains('authority')) {
+          String? authority = _extractValueFromQuery(deepLink, 'Authority');
+          String? status = _extractValueFromQuery(deepLink, 'Status');
+          ZarinPal().verificationPayment(
+            status!,
+            authority!,
+            _paymentRequest,
+            (isPaymentSuccess, refID, paymentRequest) {
+              if(isPaymentSuccess){
+                print(refID);
+              }else{
+                print('error');
+              }
+            },
+          );
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,30 +151,46 @@ class _CardScreenState extends State<CardScreen> {
                     const SliverPadding(padding: EdgeInsets.only(bottom: 100))
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 20, left: 20, bottom: 20),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 53,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorsApp.mainGreen,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                if (state is BasketDataFetchedState) ...{
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 20, left: 20, bottom: 20),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 53,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsApp.mainGreen,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                         ),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        "ادامه فرایند خرید",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'SM',
+                        onPressed: () {
+                          ZarinPal().startPayment(
+                            _paymentRequest,
+                            (status, paymentGatewayUri) {
+                              if (state == 100) {
+                                launchUrl(
+                                  Uri.parse(paymentGatewayUri!),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
+                          );
+                        },
+                        child: Text(
+                          state.basketFinalPrice != 0
+                              ? state.basketFinalPrice.toString()
+                              : "سبد خرید شما خالیه",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'SM',
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                },
               ],
             );
           },
@@ -198,7 +250,7 @@ class CardItem extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           child: Row(
                             children: [
-                              Text(basket.price.toString()),
+                              Text(basket.realPrice.toString()),
                               const SizedBox(width: 3),
                               const Text("تومان"),
                               Container(
@@ -249,10 +301,8 @@ class CardItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: SizedBox(
-                    width: 100, 
-                    child:CachedImage(
-                        imageUrl: basket.thumbnail.toString()    
-                      ),
+                    width: 100,
+                    child: CachedImage(imageUrl: basket.thumbnail.toString()),
                   ),
                 ),
               ],
@@ -332,4 +382,26 @@ class OptionCheap extends StatelessWidget {
       ),
     );
   }
+}
+
+String? _extractValueFromQuery(String url, String key) {
+  int queryStartIndex = url.indexOf('?');
+  if (queryStartIndex == -1) return null;
+
+  String query = url.substring(queryStartIndex + 1);
+
+  List<String> pairs = query.split('&');
+
+  for (String pair in pairs) {
+    List<String> keyValue = pair.split('=');
+    if (keyValue.length == 2) {
+      String currenKey = keyValue[0];
+      String value = keyValue[1];
+
+      if (currenKey == key) {
+        return Uri.decodeComponent(value);
+      }
+    }
+  }
+  return null;
 }

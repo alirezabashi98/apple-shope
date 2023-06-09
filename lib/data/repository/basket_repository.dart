@@ -6,6 +6,7 @@ import 'package:flutter_apple_shop/di/di.dart';
 abstract class IBasketRepository {
   Future<Either<String, String>> addProductToBasket(BasketModel basket);
   Future<Either<String, List<BasketModel>>> getAllBasketItems();
+  Future<int> getBasketFinalPrice();
 }
 
 class BasketRepository extends IBasketRepository {
@@ -29,5 +30,10 @@ class BasketRepository extends IBasketRepository {
     } catch (ex) {
       return left('error get all basket');
     }
+  }
+
+  @override
+  Future<int> getBasketFinalPrice() async {
+    return datasource.getBasketFinalPrice();
   }
 }

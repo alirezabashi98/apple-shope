@@ -30,13 +30,30 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
-  void initState() {
-    BlocProvider.of<ProductBloc>(context).add(ProductInitEvent(
-      widget.product.id,
-      widget.product.categoryId,
-    ));
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        var bloc = ProductBloc();
+        bloc.add(
+          ProductInitEvent(
+            widget.product.id,
+            widget.product.categoryId,
+          ),
+        );
+        return bloc;
+      },
+      child: ProductUI(widget: widget),
+    );
   }
+}
+
+class ProductUI extends StatelessWidget {
+  const ProductUI({
+    super.key,
+    required this.widget,
+  });
+
+  final ProductDetailScreen widget;
 
   @override
   Widget build(BuildContext context) {
@@ -774,8 +791,9 @@ class AddToBasketButton extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: GestureDetector(
-              onTap: () async{
+              onTap: () async {
                 context.read<ProductBloc>().add(ProductAddToBasket(product));
+                context.read<BasketBloc>().add(BasketFetchFromHiveEvent());
               },
               child: const SizedBox(
                 width: 160,
