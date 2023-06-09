@@ -15,7 +15,7 @@ import 'package:flutter_apple_shop/data/model/variant_model.dart';
 import 'package:flutter_apple_shop/data/model/variant_type_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
-import 'package:flutter_apple_shop/util/hex_color.dart';
+import 'package:flutter_apple_shop/util/extenstion/hex_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetailScreen extends StatefulWidget {

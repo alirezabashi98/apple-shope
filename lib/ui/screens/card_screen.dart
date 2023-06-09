@@ -1,58 +1,18 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_apple_shop/bloc/basket/basket_bloc.dart';
+import 'package:flutter_apple_shop/bloc/basket/basket_event.dart';
 import 'package:flutter_apple_shop/bloc/basket/basket_state.dart';
 import 'package:flutter_apple_shop/constants/constants.dart';
 import 'package:flutter_apple_shop/data/model/basket_model.dart';
 import 'package:flutter_apple_shop/generated/assets.dart';
 import 'package:flutter_apple_shop/r.dart';
 import 'package:flutter_apple_shop/ui/widgets/cached_image.dart';
-import 'package:flutter_apple_shop/util/hex_color.dart';
+import 'package:flutter_apple_shop/util/extenstion/hex_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:zarinpal/zarinpal.dart';
 
-class CardScreen extends StatefulWidget {
+class CardScreen extends StatelessWidget {
   const CardScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CardScreen> createState() => _CardScreenState();
-}
-
-class _CardScreenState extends State<CardScreen> {
-  PaymentRequest _paymentRequest = PaymentRequest();
-  @override
-  void initState() {
-    super.initState();
-    _paymentRequest.setIsSandBox(true);
-    _paymentRequest.setAmount(1000);
-    _paymentRequest.setDescription('this is for test');
-    // todo
-    _paymentRequest.setMerchantID('merchantID');
-    _paymentRequest.setCallbackURL('alirezabashi98://shop');
-
-    linkStream.listen(
-      (deepLink) {
-        if (deepLink!.toLowerCase().contains('authority')) {
-          String? authority = _extractValueFromQuery(deepLink, 'Authority');
-          String? status = _extractValueFromQuery(deepLink, 'Status');
-          ZarinPal().verificationPayment(
-            status!,
-            authority!,
-            _paymentRequest,
-            (isPaymentSuccess, refID, paymentRequest) {
-              if(isPaymentSuccess){
-                print(refID);
-              }else{
-                print('error');
-              }
-            },
-          );
-        }
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,17 +126,12 @@ class _CardScreenState extends State<CardScreen> {
                           ),
                         ),
                         onPressed: () {
-                          ZarinPal().startPayment(
-                            _paymentRequest,
-                            (status, paymentGatewayUri) {
-                              if (state == 100) {
-                                launchUrl(
-                                  Uri.parse(paymentGatewayUri!),
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              }
-                            },
-                          );
+                          context
+                              .read<BasketBloc>()
+                              .add(BasketPaymentInitEvent());
+                          context
+                              .read<BasketBloc>()
+                              .add(BasketPaymentRequestEvent());
                         },
                         child: Text(
                           state.basketFinalPrice != 0
@@ -384,24 +339,4 @@ class OptionCheap extends StatelessWidget {
   }
 }
 
-String? _extractValueFromQuery(String url, String key) {
-  int queryStartIndex = url.indexOf('?');
-  if (queryStartIndex == -1) return null;
 
-  String query = url.substring(queryStartIndex + 1);
-
-  List<String> pairs = query.split('&');
-
-  for (String pair in pairs) {
-    List<String> keyValue = pair.split('=');
-    if (keyValue.length == 2) {
-      String currenKey = keyValue[0];
-      String value = keyValue[1];
-
-      if (currenKey == key) {
-        return Uri.decodeComponent(value);
-      }
-    }
-  }
-  return null;
-}

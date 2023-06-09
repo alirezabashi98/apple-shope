@@ -7,7 +7,7 @@ import 'package:flutter_apple_shop/util/open_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/model/category_model.dart';
-import '../../util/hex_color.dart';
+import '../../util/extenstion/hex_color.dart';
 
 class CategoryHorizontalItemChip extends StatelessWidget {
   final CategoryModel category;
